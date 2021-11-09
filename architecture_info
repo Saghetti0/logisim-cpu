@@ -1,0 +1,63 @@
+Instruction encoding:
+
+BYTE 1        BYTE 2
+00   000000   00000000
+COND INST     OPERAND
+
+COND:
+00: Always
+01: If A>0 (suffix = a)
+10: If B>0 (suffix = b)
+
+00 0000 00: CPY A, A
+01 0000 01: CPY A, B
+02 0000 10: CPY B, A
+03 0000 11: CPY B, B
+
+04 0001 00: ADD A, B
+05 0001 01: ADD B, A
+06 0001 10: SUB A, B
+07 0001 11: SUB B, A
+
+08 0010 00: LDR A, cleaned
+09 0010 01: LDR B, address
+0A 0010 10: STR A, address
+0B 0010 11: STR B, address
+
+0C 0011 00: LDI A, immediate
+0D 0011 01: LDI B, immediate
+
+0E 0011 10: JMP A
+0F 0011 11: JMP B
+
+10 0100 00: JMI immediate
+11 0100 01: NOP
+12 0100 10: NOP
+13 0100 11: NOP
+
+14 0101 00: LDRI A, [B]
+15 0101 01: LDRI B, [A]
+16 0101 10: STRI A, [B]
+17 0101 11: STRI B, [A]
+
+Control bus:
+0: Connect A to data bus
+1: Write data bus to A
+2: Connect B to data bus
+3: Write data bus to B
+4: Connect A+B to data bus
+5: Connect A-B to data bus
+6: Connect B-A to data bus
+7: Connect memory to data bus
+8: Write data bus to memory
+9: Connect PC to data bus
+10: Write data bus to PC
+11: Connect operand to data bus
+12: Connect operand to address bus
+13: Connect A to address bus
+14: Connect B to address bus
+15: Update ALU inputs
+
+Flags bus:
+0: A>0
+1: B>0

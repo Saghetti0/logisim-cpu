@@ -1,0 +1,20 @@
+.start
+
+00  0D 0F  LDI B, 0f         address to start printing (-1)
+
+02  0C 01  LDI A, 01         number to increment b by
+04  05 00  ADD B, A          increment b by 1
+
+06  14 00  LDRI A, [B]       store current character into a
+08  0A FF  STR A, ff         write current character to screen
+0A  50 02  JMIA 02           jump back to start if the character wasn't a terminator
+
+0C  10 0C  JMI 0C            busy loop
+
+.data
+10  68
+11  65
+12  6c
+13  6c
+14  6f
+15  00
